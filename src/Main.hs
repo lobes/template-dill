@@ -1,14 +1,16 @@
 module Main where
 
-import Main.Utf8 qualified as Utf8
+import Network.HTTP.Types (status200)
+import Network.Wai (Response, responseLBS)
+import Network.Wai.Handler.Warp qualified as Warp
 
-{- |
- Main entry point.
+application :: forall {p} {b}. p -> (Response -> b) -> b
+application _ respond =
+  respond $
+    responseLBS status200 [("Content-Type", "text/plain")] "Hello World"
 
- The `, run` script will invoke this function.
--}
 main :: IO ()
-main = do
-  -- For withUtf8, see https://serokell.io/blog/haskell-with-utf8
-  Utf8.withUtf8 $ do
-    putTextLn "Hello 🌎"
+main = Warp.run 3000 application
+
+-- todo: figure out a way to turn elm part into a flake that plays nice with the api
+-- todo: look into postgres for the datastore

@@ -17,6 +17,7 @@
         inputs.treefmt-nix.flakeModule
       ];
       perSystem = { self', system, lib, config, pkgs, ... }: {
+        # See https://dev.to/dwayne/how-i-use-nix-in-my-elm-projects-5h42 for starting point to add elm
         # Our only Haskell project. You can have multiple projects, but this template
         # has only one.
         # See https://github.com/srid/haskell-flake/blob/master/example/flake.nix
